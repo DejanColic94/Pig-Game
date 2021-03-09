@@ -8,3 +8,21 @@ GAME RULES:
 - The first player to reach 100 points on GLOBAL score wins the game
 
 */
+
+var scores = [0,0];
+var roundScore;
+var activePlayer = 0;
+
+// RNG daje broj 1-6
+var dice = Math.floor(Math.random() * 6) + 1;
+
+// querySelector kao setter
+ document.querySelector('#current-' + activePlayer).textContent = dice;
+// document.querySelector('#current-' + activePlayer).innerHTML = '<em>' + dice + '</em>' 
+
+// querySelector kao getter
+// var x = document.querySelector('#current-0').textContent;
+
+// changing css
+document.querySelector('.dice').style.display = 'none';
+
