@@ -8,7 +8,7 @@ GAME RULES:
 - The first player to reach 100 points on GLOBAL score wins the game
 
 */
-var scores,roundScore,activePlayer;
+var scores,roundScore,activePlayer,gamePlaying;
 init();
 
 // RNG daje broj 1-6
@@ -25,6 +25,7 @@ init();
 
 // button event
 document.querySelector('.btn-roll').addEventListener('click',function() {
+    if(gamePlaying) {
     // 1. rng
     var dice = Math.floor(Math.random() * 6) + 1;
 
@@ -40,6 +41,7 @@ document.querySelector('.btn-roll').addEventListener('click',function() {
     }else {
        nextPlayer();
     }
+}
 });
 
 
@@ -49,6 +51,8 @@ document.querySelector('.btn-roll').addEventListener('click',function() {
 
 // hold button
 document.querySelector('.btn-hold').addEventListener('click', function() {
+
+    if(gamePlaying) {
 
     // add score to global
     scores[activePlayer] += roundScore;
@@ -60,11 +64,13 @@ document.querySelector('.btn-hold').addEventListener('click', function() {
         document.querySelector('.dice').style.display = 'none';
         document.querySelector('.player-'+activePlayer+'-panel').classList.add('winner');
         document.querySelector('.player-'+activePlayer+'-panel').classList.remove('active');
+        gamePlaying = false;
         
     }else {
         // switch
          nextPlayer();
     }
+}
     
 });
 
@@ -96,6 +102,7 @@ function init() {
      scores = [0,0];
      roundScore = 0;
      activePlayer = 0;
+     gamePlaying = true;
 
     // changing css
     document.querySelector('.dice').style.display = 'none';
