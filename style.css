@@ -64,7 +64,7 @@ body {
 
 .player-score {
     text-align: center;
-    font-size: 80px;
+    font-size: 75px;
     font-weight: 100;
     color: #EB4D4D;
     margin-bottom: 130px;
@@ -75,7 +75,7 @@ body {
 
 .active .player-name::after {
     content: "\2022";
-    font-size: 47px;
+    font-size: 50px;
     position: absolute;
     color: #EB4D4D;
     top: -7px;
