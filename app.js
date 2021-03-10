@@ -47,21 +47,67 @@ document.querySelector('.btn-roll').addEventListener('click',function() {
         roundScore += dice;
         document.querySelector('#current-' + activePlayer).textContent = roundScore;
     }else {
-        activePlayer === 0 ? activePlayer = 1 : activePlayer = 0;
-        roundScore = 0;
-
-        document.getElementById('current-0').textContent = '0';
-        document.getElementById('current-1').textContent = '0';
-
-        // document.querySelector('.player-0-panel').classList.remove('active');
-        // document.querySelector('.player-1-panel').classList.add('active');
-
-        document.querySelector('.player-0-panel').classList.toggle('active');
-        document.querySelector('.player-1-panel').classList.toggle('active');
-
-        // hide the dice for the next players turn
-        document.querySelector('.dice').style.display = 'none';
+       nextPlayer();
     }
-
-
 });
+
+
+
+
+
+
+// hold button
+document.querySelector('.btn-hold').addEventListener('click', function() {
+
+    // add score to global
+    scores[activePlayer] += roundScore;
+    // display
+    document.querySelector('#score-'+activePlayer).textContent = scores[activePlayer];
+    // check win condition
+    if(scores[activePlayer] >= 20) {
+        document.getElementById('name-'+activePlayer).textContent = 'Winner!';
+        document.querySelector('.dice').style.display = 'none';
+        document.querySelector('.player-'+activePlayer+'-panel').classList.add('winner');
+        document.querySelector('.player-'+activePlayer+'-panel').classList.remove('active');
+        
+    }else {
+        // switch
+         nextPlayer();
+    }
+    
+});
+
+
+// Switch player function
+function nextPlayer() {
+    activePlayer === 0 ? activePlayer = 1 : activePlayer = 0;
+    roundScore = 0;
+
+    document.getElementById('current-0').textContent = '0';
+    document.getElementById('current-1').textContent = '0';
+
+    // document.querySelector('.player-0-panel').classList.remove('active');
+    // document.querySelector('.player-1-panel').classList.add('active');
+
+    document.querySelector('.player-0-panel').classList.toggle('active');
+    document.querySelector('.player-1-panel').classList.toggle('active');
+
+    // hide the dice for the next players turn
+    document.querySelector('.dice').style.display = 'none';
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
