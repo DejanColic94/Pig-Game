@@ -10,14 +10,20 @@ GAME RULES:
 */
 
 var scores = [0,0];
-var roundScore;
+var roundScore = 0;
 var activePlayer = 0;
 
+document.getElementById('score-0').textContent = '0';
+document.getElementById('score-1').textContent = '0';
+
+document.getElementById('current-0').textContent = '0';
+document.getElementById('current-1').textContent = '0';
+
 // RNG daje broj 1-6
-var dice = Math.floor(Math.random() * 6) + 1;
+//var dice = Math.floor(Math.random() * 6) + 1;
 
 // querySelector kao setter
- document.querySelector('#current-' + activePlayer).textContent = dice;
+// document.querySelector('#current-' + activePlayer).textContent = dice;
 // document.querySelector('#current-' + activePlayer).innerHTML = '<em>' + dice + '</em>' 
 
 // querySelector kao getter
@@ -26,3 +32,36 @@ var dice = Math.floor(Math.random() * 6) + 1;
 // changing css
 document.querySelector('.dice').style.display = 'none';
 
+// button event
+document.querySelector('.btn-roll').addEventListener('click',function() {
+    // 1. rng
+    var dice = Math.floor(Math.random() * 6) + 1;
+
+    // 2. display 
+    var diceDOM =  document.querySelector('.dice');
+    diceDOM.style.display = 'block';
+    diceDOM.src = 'dice-'+dice+'.png';
+
+    // 3. update score
+    if(dice !== 1) {
+        roundScore += dice;
+        document.querySelector('#current-' + activePlayer).textContent = roundScore;
+    }else {
+        activePlayer === 0 ? activePlayer = 1 : activePlayer = 0;
+        roundScore = 0;
+
+        document.getElementById('current-0').textContent = '0';
+        document.getElementById('current-1').textContent = '0';
+
+        // document.querySelector('.player-0-panel').classList.remove('active');
+        // document.querySelector('.player-1-panel').classList.add('active');
+
+        document.querySelector('.player-0-panel').classList.toggle('active');
+        document.querySelector('.player-1-panel').classList.toggle('active');
+
+        // hide the dice for the next players turn
+        document.querySelector('.dice').style.display = 'none';
+    }
+
+
+});
